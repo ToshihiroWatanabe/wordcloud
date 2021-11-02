@@ -32,7 +32,7 @@ def resultfunc(request):
         node = node.next
     c = collections.Counter(meishi_list)
     c.most_common(10)
-    wordcloud = WordCloud(font_path='../fonts/NotoSansCJKjp-Regular.otf',
+    wordcloud = WordCloud(font_path='../static/fonts/NotoSansCJKjp-Regular.otf',
                           background_color="white",
                           width=1280,
                           height=720,
