@@ -39,26 +39,25 @@ def resultfunc(request):
     c.most_common(10)
     wordcloud = WordCloud(font_path='../fonts/NotoSansCJKjp-Regular.otf',
                           background_color="white",
-                          width=600,
-                          height=400,
-                          min_font_size=15,
+                          width=1280,
+                          height=720,
+                          min_font_size=18,
                           prefer_horizontal=1)
     wordcloud.generate(" ".join(meishi_list))
 
-    plt.figure(figsize=(12, 8))
+    plt.figure(figsize=(12.8, 7.2), dpi=100)
     plt.axis("off")
     plt.imshow(wordcloud)
+    plt.subplots_adjust(left=0, right=1, bottom=0, top=1)
 
-    list = []
-    list.append([plt2png(), url])
-    return render(request, 'result.html', {'list': list})
+    return render(request, 'result.html', {'image': plt2png(), 'url': url})
 
 # png画像形式に変換する関数
 
 
 def plt2png():
     buf = io.BytesIO()
-    plt.savefig(buf, format='png', dpi=200)
+    plt.savefig(buf, format='png', dpi=100)
     s = buf.getvalue()
     s = base64.b64encode(s)
     s = s.decode('utf-8')
