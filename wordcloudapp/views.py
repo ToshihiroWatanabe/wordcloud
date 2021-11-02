@@ -17,10 +17,10 @@ class Create(CreateView):
     template_name = 'home.html'
     model = Form
     fields = ('url',)
-    success_url = reverse_lazy('list')
+    success_url = reverse_lazy('result')
 
 
-def listfunc(request):
+def resultfunc(request):
     for post in Form.objects.all():
         url = post.url
     response = requests.get(url)
@@ -51,7 +51,7 @@ def listfunc(request):
 
     list = []
     list.append([plt2png(), url])
-    return render(request, 'list.html', {'list': list})
+    return render(request, 'result.html', {'list': list})
 
 # png画像形式に変換する関数
 
