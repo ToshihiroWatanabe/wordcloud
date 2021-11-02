@@ -11,6 +11,8 @@ from wordcloud import WordCloud
 import matplotlib.pyplot as plt
 import io
 import base64
+from django.http import HttpResponse
+from wordcloudapp.forms import Form
 
 
 class Create(CreateView):
@@ -20,9 +22,15 @@ class Create(CreateView):
     success_url = reverse_lazy('result')
 
 
+def homefunc(request):
+    if request.method == 'POST':
+        return resultfunc(request)
+    else:
+        return render(request, 'home.html', {'form': Form()})
+
+
 def resultfunc(request):
-    for post in Form.objects.all():
-        url = post.url
+    url = request.POST.get('url')
     response = requests.get(url)
     bs = BeautifulSoup(response.content, "html.parser")
     bs = bs.get_text(strip=False)
