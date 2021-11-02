@@ -1,7 +1,4 @@
 from django.shortcuts import render
-from .models import Form
-from django.views.generic import CreateView
-from django.urls import reverse_lazy
 import requests
 from bs4 import BeautifulSoup
 import MeCab
@@ -11,22 +8,12 @@ from wordcloud import WordCloud
 import matplotlib.pyplot as plt
 import io
 import base64
-from django.http import HttpResponse
 from wordcloudapp.forms import Form
-
-
-class Create(CreateView):
-    template_name = 'home.html'
-    model = Form
-    fields = ('url',)
-    success_url = reverse_lazy('result')
+from django.shortcuts import redirect
 
 
 def homefunc(request):
-    if request.method == 'POST':
-        return resultfunc(request)
-    else:
-        return render(request, 'home.html', {'form': Form()})
+    return render(request, 'home.html', {'form': Form()})
 
 
 def resultfunc(request):
