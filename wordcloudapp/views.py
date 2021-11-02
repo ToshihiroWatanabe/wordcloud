@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import News
+from .models import Form
 from django.views.generic import CreateView
 from django.urls import reverse_lazy
 import requests
@@ -15,13 +15,13 @@ import base64
 
 class Create(CreateView):
     template_name = 'home.html'
-    model = News
+    model = Form
     fields = ('url',)
     success_url = reverse_lazy('list')
 
 
 def listfunc(request):
-    for post in News.objects.all():
+    for post in Form.objects.all():
         url = post.url
     response = requests.get(url)
     bs = BeautifulSoup(response.content, "html.parser")
