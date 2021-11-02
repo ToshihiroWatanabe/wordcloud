@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<div>
+    <div>
+        <h1>スクレイピング</h1>
+        <p>URLを入力してください</p>
+    </div>
+</div>
+{% endblock header %}
+
+{% block content %}
+<div>
+    <form action='' method='POST'>{% csrf_token %}
+        <p>URL： <input type="text" name='url'></p>
+        <input type="submit" value="取得する">
+    </form>
+</div>
+{% endblock content %}
